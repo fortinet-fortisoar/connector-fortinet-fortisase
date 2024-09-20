@@ -1,0 +1,502 @@
+{
+  "name": "fortinet-fortisase",
+  "version": "1.0.0",
+  "label": "Fortinet FortiSASE",
+  "description": "FortiSASE connector for managing services, hosts, host groups, and policies",
+  "publisher": "",
+  "icon_small_name": "sase_small.png",
+  "icon_large_name": "white_back_sase.png",
+  "id": 85,
+  "configuration": {
+    "fields": [
+      {
+        "name": "server",
+        "title": "Server URL",
+        "type": "text",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "value": "https://portal.prod.fortisase.com",
+        "tooltip": "Specify the URL of the FortiSASE server to connect and perform automated operations. To find the url of the FortiSASE server, navigate to the FortiSASE portal and copy the URL from the address bar of the browser.",
+        "description": "Specify the URL of the FortiSASE server to connect and perform automated operations.",
+        "isOnChange": false,
+        "onchange": {}
+      },
+      {
+        "title": "Authentication Method",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "name": "auth_method",
+        "options": [
+          "Username/Password",
+          "Token"
+        ],
+        "value": "Username/Password",
+        "onchange": {
+          "Username/Password": [
+            {
+              "title": "Username",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "username",
+              "description": "Enter your FortiSASE username",
+              "tooltip": "Your FortiSASE account username",
+              "isOnChange": true,
+              "onChangeParam": "Authentication Method",
+              "onChangeOption": "Username/Password"
+            },
+            {
+              "title": "Password",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "password",
+              "description": "Enter your FortiSASE password",
+              "tooltip": "Your FortiSASE account password",
+              "isOnChange": true,
+              "onChangeParam": "Authentication Method",
+              "onChangeOption": "Username/Password"
+            },
+            {
+              "title": "Client ID",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "client_id",
+              "description": "Enter your FortiSASE client ID",
+              "tooltip": "Your FortiSASE client ID for authentication",
+              "isOnChange": true,
+              "onChangeParam": "Authentication Method",
+              "onChangeOption": "Username/Password"
+            }
+          ],
+          "Token": [
+            {
+              "title": "Token",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "token",
+              "description": "Enter your FortiSASE authentication token",
+              "tooltip": "Your FortiSASE authentication token",
+              "isOnChange": true,
+              "onChangeParam": "Authentication Method",
+              "onChangeOption": "Token"
+            }
+          ]
+        },
+        "isOnChange": false
+      },
+      {
+        "name": "verify_ssl",
+        "title": "Verify SSL",
+        "type": "checkbox",
+        "editable": true,
+        "visible": true,
+        "required": false,
+        "value": true,
+        "description": "Select whether the SSL certificate for the server is to be verified. By default, this option is set to True.\"",
+        "isOnChange": false,
+        "onchange": {}
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_service",
+      "title": "Get Service",
+      "description": "Retrieve a specific service by its primary key",
+      "category": "investigation",
+      "annotation": "get_service",
+      "parameters": [
+        {
+          "name": "service_name",
+          "title": "Service Name",
+          "description": "Name of the service to retrieve",
+          "type": "text",
+          "required": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "primaryKey": "",
+        "category": "",
+        "protocol": "",
+        "tcpPortrange": ""
+      }
+    },
+    {
+      "operation": "get_services",
+      "title": "Get Services",
+      "description": "Retrieve all services",
+      "category": "investigation",
+      "annotation": "get_services",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {
+        "services": []
+      }
+    },
+    {
+      "operation": "create_service",
+      "title": "Create Service",
+      "description": "Create a new service",
+      "category": "investigation",
+      "annotation": "create_service",
+      "parameters": [
+        {
+          "title": "Primary Key",
+          "description": "Unique identifier for the service",
+          "type": "text",
+          "name": "primaryKey",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Category",
+          "description": "Category of the service",
+          "type": "text",
+          "name": "category",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Protocol",
+          "description": "Protocol used by the service",
+          "type": "text",
+          "name": "protocol",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "TCP Port Range",
+          "description": "TCP port range for the service",
+          "type": "json",
+          "name": "tcpPortrange",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "service": {}
+      }
+    },
+    {
+      "operation": "delete_service",
+      "title": "Delete Service",
+      "description": "Delete a service by primary key",
+      "category": "investigation",
+      "annotation": "delete_service",
+      "parameters": [
+        {
+          "title": "Primary Key",
+          "description": "Unique identifier of the service to delete",
+          "type": "text",
+          "name": "primaryKey",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "get_host",
+      "title": "Get Host",
+      "description": "Retrieve a specific host by its name",
+      "category": "investigation",
+      "annotation": "get_host",
+      "parameters": [
+        {
+          "title": "Host Name",
+          "description": "Name of the host to retrieve",
+          "tooltip": "The name of the host to retrieve",
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "host_name",
+          "required": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "primaryKey": "",
+        "type": "",
+        "location": "",
+        "subnet": ""
+      }
+    },
+    {
+      "operation": "create_host",
+      "title": "Create Host",
+      "description": "Create a new host",
+      "category": "investigation",
+      "annotation": "create_host",
+      "parameters": [
+        {
+          "title": "Name",
+          "description": "Unique identifier for the host",
+          "type": "text",
+          "name": "primaryKey",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "validation": {
+            "pattern": "^({{.*}}|[\\w<>()#\"\\]\\s\\.-]{1,79})$",
+            "patternError": "Primary Key must be 1-79 characters and match the pattern: ^[\\w<>()#\"\\]\\s-]{1,79}$"
+          }
+        },
+        {
+          "title": "Type",
+          "description": "Type of the host",
+          "type": "select",
+          "name": "type",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "options": [
+            "ipmask",
+            "iprange",
+            "fqdn",
+            "geography"
+          ],
+          "value": "ipmask",
+          "onchange": {
+            "ipmask": [
+              {
+                "title": "Subnet",
+                "description": "Subnet of the host (required for ipmask type)",
+                "type": "text",
+                "name": "subnet",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "validation": {
+                  "pattern": "^(\\{\\{.*?\\}\\}|(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d))/(0|[1-9]|[1-2]\\d|3[0-2])$",
+                  "patternError": "Subnet must be a valid IPv4 CIDR notation"
+                }
+              }
+            ],
+            "iprange": [
+              {
+                "title": "Start IP",
+                "description": "Start IP address (required for iprange type)",
+                "type": "text",
+                "name": "startIp",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "validation": {
+                  "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                  "patternError": "Start IP must be a valid IPv4 address"
+                }
+              },
+              {
+                "title": "End IP",
+                "description": "End IP address (required for iprange type)",
+                "type": "text",
+                "name": "endIp",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "validation": {
+                  "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                  "patternError": "End IP must be a valid IPv4 address"
+                }
+              }
+            ],
+            "fqdn": [
+              {
+                "title": "FQDN",
+                "description": "Fully Qualified Domain Name (required for fqdn type)",
+                "type": "text",
+                "name": "fqdn",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "validation": {
+                  "pattern": "^({{.*}}|([a-zA-Z0-9_\\-]{1,63}\\.)+[a-zA-Z]{2,63})$",
+                  "patternError": "FQDN must be a valid domain name (1-255 characters)"
+                }
+              }
+            ],
+            "geography": [
+              {
+                "title": "Country ID",
+                "description": "Two-letter country code (required for geography type)",
+                "type": "text",
+                "name": "countryId",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "validation": {
+                  "pattern": "^({{.*}}|[a-zA-Z]{2})$",
+                  "patternError": "Country ID must be a two-letter country code"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "title": "Location",
+          "description": "Location of the host",
+          "type": "select",
+          "name": "location",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "unspecified",
+          "options": [
+            "internal",
+            "external",
+            "private-access",
+            "unspecified"
+          ]
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "host": {}
+      }
+    },
+    {
+      "operation": "delete_host",
+      "title": "Delete Host",
+      "description": "Delete a host by primary key",
+      "category": "investigation",
+      "annotation": "delete_host",
+      "parameters": [
+        {
+          "title": "Primary Key",
+          "description": "Unique identifier of the host to delete",
+          "type": "text",
+          "name": "primaryKey",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ]
+    },
+    {
+      "operation": "create_to_hub_policy",
+      "title": "Create To Hub Policy",
+      "description": "Create a new To Hub policy",
+      "category": "investigation",
+      "annotation": "create_to_hub_policy",
+      "parameters": [
+        {
+          "title": "Policy Configuration",
+          "description": "Full configuration of the To Hub policy",
+          "type": "json",
+          "name": "policy_config",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "enabled": false,
+      "output_schema": {
+        "policy": {}
+      }
+    },
+    {
+      "operation": "create_from_hub_policy",
+      "title": "Create From Hub Policy",
+      "description": "Create a new From Hub policy",
+      "category": "investigation",
+      "annotation": "create_from_hub_policy",
+      "parameters": [
+        {
+          "title": "Policy Configuration",
+          "description": "Full configuration of the From Hub policy",
+          "type": "json",
+          "name": "policy_config",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "enabled": false,
+      "output_schema": {
+        "policy": {}
+      }
+    },
+    {
+      "operation": "generic_api_call",
+      "title": "Generic API Call",
+      "description": "Make a generic API call to FortiSASE",
+      "category": "investigation",
+      "annotation": "generic_api_call",
+      "parameters": [
+        {
+          "name": "method",
+          "title": "HTTP Method",
+          "description": "The HTTP method for the API call (e.g., GET, POST, PUT, DELETE)",
+          "type": "select",
+          "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ],
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "name": "endpoint",
+          "title": "API Endpoint",
+          "description": "The API endpoint to call (e.g., /resource-api/v2/security/services)",
+          "type": "text",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "name": "data",
+          "title": "Request Data",
+          "description": "JSON data to send with the request (for POST, PUT methods)",
+          "type": "json",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "result": {}
+      }
+    }
+  ],
+  "category": "Network Security",
+  "contributor": null,
+  "active": true,
+  "cs_compatible": true,
+  "system": false,
+  "playbook_collections": [
+    {
+      "@id": "/api/3/workflow_collections/9af037cd-8900-481b-bca3-428aa8f02b4d",
+      "name": "00 - FortiSASE Playbook",
+      "description": "FortiSASE Playbooks for managing services, hosts, host groups, and policies"
+    }
+  ],
+  "icon_small": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAELklEQVRYR9WXV2hUQRSGXbtRsWCvCYqF2IkvigXEB0FRUInYDWII2EvsilhQA0bErqhYwEgEETsWUKKCLxrsmtg1WEhMxMSW+P3r3DDe7N2r60Nw4GdnTptzz5xzZjZQoZxHoJz3r/B/OFBSUtKbSPUAFwKBwN1wUUO2K/x+4BqyN/wiHDYCGKuBgZXgDbgD5Eg+hlPchpGtaGS/8Hsd9AR1wWLkv3o54udAJxRjMZDmGGCjS8wPgncuoy1Zt0d2uiWbyDwD2u1IHeiFYiUMXLGMrmL+Adx3Ge3IugDZXZZsH+bF0DIidaAViqPAJowU8fUNmF8Ag1i/to3Ca8p6C5gIL591TXMk21k/jNSBKBTPgizwHXQDSV7JxaZx8NeDRyAG1AP9kP8cqQMDUNQxrAGKRjQYA6ZgtNh8JdPAJ+ZVoR8BG8BzkAMmgQfwL/61AxisZsIdj4FXMmAyfZ/ZQOdbGRQb3OJXTihCJUZeR7YdjHRobkdCVgEbib4U5KG4yVGC3ob5AnAPpMPTl8oxVcBw0F4RgK4jCA54U/iJgrbRvbnWXg4ogfagFG8rYewQ60ledW36xm74OqbSAX0PiznQcz0jgFCwaYBo0AKcQGG19SUqv0xoOmfPgR05HYPcWkt3LvPBQL1Dx7nCcaY0Aigmw/gBlETVwXGQiGA2vDrMlUhxXmdpbaY8eAzamdJty1wRGALywSxQw/k42wElyzQY32SMTZX980A6aAJawJOy70B3N0KZ4C0YAVLRLW1G8LUO2rId2Mp6huWAevkKcBSoydSEt9B391/Oq2xV+y/BULAOXd0PwQFfiTrb7cBU8WBsMcl0gPV81lmsmzHfxlzGfAfy5xFKUJUwV0NSJY1mXcB6EPOOzHXUv0VAda+wdDdffAChYF83ZXmaaTI0hdZzIKsLTCU30MkXaONYKzmzgY4lBZ5uzbJliHAV6LXlNUJjnZ2g12e+HtpkHwd0lIuQy7N0dzJfAnKdI3Z44RrRMoRyUNhhGVJCqZyWQ39mO4KDHRQhcAZeaalCnwCtMTTdEWWG53vAtOLLaAxFWX3dOYrDTHWu2kSvI/UMOaWX0Clkk1xR28t6mFf5+j1IlDC6AVOBKkGb6ZGh9qqzjjabPTHO7Od3M3gKdF3r7J+z+bkQHx8k+TlQCxk1IF3FL0BnMByDugvKDKLW3zigRG0N1JT6Il8YqQMykgCUtbpyFYUTYICdZDIOrzk/qprx8N6b1q73pBJXzoccfhEI9SRTj1c5uaPQRZFyJa3eE4XQrkbqQCyKahpqx8HBl53i5yRwP0oVnRhkZ1qy45nfDNc7/CLgNCdVgRJNCVlkf6W1mWzp7igAegWrLBsCHV/wfgk1/uifkXlwqCLSMPbRy5iJUCN+1S+OIfvbwzViB8Jt+K+8P4rAv24STr/cHfgJPKDGMNwIU2QAAAAASUVORK5CYII=",
+  "icon_large": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAelUlEQVR4Xu2dBXRUVxPHZ6OEhAQv0CJVKFB3d6PuSt3dqFI36qXu7i2l7u6FlgrFoQKFtnggEM9+9zebCY/tZve9zduQcz5eT05o9u3be+/Yf/4z926krKwsKsuvFrMCkeYUSDQaFX68VyQSEX5awtUSxpdxgZgA+F1XVyeVlZVSU1Oj65+TkyP5+fmSlZXVIJTmFo5XCIyvoqJCamtrdXx5eXk6Pq7mUpyMCsSEwUTHjBkjI0aM0N+zZ89WIXTo0EH69OkjG264ofTv319yc3MbJt8cFmPjKy8vl59//lm+++47mTRpkixYsEDH161bN1lnnXVkgw02kNVWW02tm79n8sqYQBh8VVWVfPHFF/Lpp5/KhAkTdB5oX3Z29lL/5t411lhDdthhB9lyyy1VMzNtKXwm1vDGG2/I119/LX///beOzRbdLBor5mfdddeVAQMGSL9+/TI6towIhMngll555RV5+eWX1VWhWSUlJTqxHj16qEBmzJihmjlnzhy9H0Hts88+cuCBB6q1ZFIoCOOee+6Rb775RoXA52Gxa6+9trRt21bHM2XKFPn9999l4cKFeg+COf/889WiMzW20AXCwKurq+Xpp5+W9957TyfWvXt3Oeyww2TNNdeU1q1bN5g9gsJdYD3PPvus/PHHH/rabrvtJkcdddRSsSUsN8H4WMzbbrtNvvzyS/034zr44INl1VVXbYhp3IfFzJs3T7799lsZNmyYOAAkRUVFcuqpp8omm2wS1pCWBjmZQFlM4K677tIAziTPO+886dy5s2pZvGaZH58/f75qLBaDtl544YWy1lprheqzbZGx3BdffFHHsu2228qJJ56on5lofLZaY8eOlZtvvlnjC0p1ww03yIorrhi6pYRuIYsWLZKLL75Y3VGvXr3k8ssvlzZt2iQduAmltLRUrrnmGrUUAupVV12lbs5iTlNVks+ZPHmyXHHFFaosm222mWo7C5zq4r24MIQyd+5c2WmnneT4448PVWEUzYVpIQyaAI6m43rOOussnbRfyMj7QTpDhw5Vt3fGGWfIFltsEcqkTejPPfecDB8+XDp27KgCX2GFFXxpucHj559/XmNjYWGh3HrrrfqcMK9QBYLPveWWW2TkyJHqqpgwON5vALRJ875ff/1V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",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/",
+  "vendor_version": null
+}

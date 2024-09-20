@@ -1,0 +1,217 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@context": "/api/3/contexts/WorkflowCollection",
+      "@type": "WorkflowCollection",
+      "name": "00 - FortiSASE Playbook",
+      "description": null,
+      "visible": true,
+      "image": null,
+      "uuid": "1b2b1964-cdb6-44c5-ba7f-17350a570af7",
+      "id": 99,
+      "createDate": 1726077861.050163,
+      "modifyDate": 1726077861.050163,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Hosts",
+          "aliasName": null,
+          "tag": null,
+          "description": "Get FortiSASE Host Objects",
+          "isActive": true,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1726077861,
+          "collection": "/api/3/workflow_collections/1b2b1964-cdb6-44c5-ba7f-17350a570af7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b9346c53-c138-4fd4-882d-eddfff323d6e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "get Host",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiSASE",
+                "config": "41f6a95f-3c2d-48bc-a60b-5cb31137fed8",
+                "params": {
+                  "host_name": "gmail.com"
+                },
+                "version": "1.0.0",
+                "connector": "fortinet-fortisase",
+                "operation": "get_host",
+                "operationTitle": "Get Host",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "278",
+              "left": "192",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "21ae72c2-2251-466e-a40d-42bd75377ac2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "__triggerLimit": true,
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                },
+                "triggerOnSource": true,
+                "triggerOnReplicate": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "b9346c53-c138-4fd4-882d-eddfff323d6e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> get Host",
+              "targetStep": "/api/3/workflow_steps/21ae72c2-2251-466e-a40d-42bd75377ac2",
+              "sourceStep": "/api/3/workflow_steps/b9346c53-c138-4fd4-882d-eddfff323d6e",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "346b3a11-6d72-4926-a52f-bd3287fd7975"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "17782921-d57d-4ca0-947f-fc73b01529fc",
+          "id": 1078,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Services",
+          "aliasName": null,
+          "tag": null,
+          "description": null,
+          "isActive": true,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1726077861,
+          "collection": "/api/3/workflow_collections/1b2b1964-cdb6-44c5-ba7f-17350a570af7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/293c036d-aca7-40b4-9e82-ba5af2709359",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Services",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiSASE",
+                "config": "ae4747d6-bc1b-4f5c-8dc5-7cefcbc565b2",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "fortinet-fortisase",
+                "operation": "get_services",
+                "operationTitle": "Get Services",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "305",
+              "left": "288",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "04f498c3-1815-4543-b580-847d673502b7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "set services",
+              "description": null,
+              "arguments": {
+                "services": "{{vars.steps.Get_Services.data.data}}"
+              },
+              "status": null,
+              "top": "313",
+              "left": "664",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "52758eb0-8240-41a4-9e82-7c5c7c885f79"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "__triggerLimit": true,
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                },
+                "triggerOnSource": true,
+                "triggerOnReplicate": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "293c036d-aca7-40b4-9e82-ba5af2709359"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Services -> set services",
+              "targetStep": "/api/3/workflow_steps/52758eb0-8240-41a4-9e82-7c5c7c885f79",
+              "sourceStep": "/api/3/workflow_steps/04f498c3-1815-4543-b580-847d673502b7",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "a50cf8eb-adb9-410b-8066-fe7aaf34718a"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Services",
+              "targetStep": "/api/3/workflow_steps/04f498c3-1815-4543-b580-847d673502b7",
+              "sourceStep": "/api/3/workflow_steps/293c036d-aca7-40b4-9e82-ba5af2709359",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "146f9cef-58c9-422d-bfa2-83b271d228f0"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "e39ce9b7-3147-41ff-b138-d3d69d1b7d30",
+          "id": 1079,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": []
+        }
+      ]
+    }
+  ],
+  "exported_tags": []
+}
