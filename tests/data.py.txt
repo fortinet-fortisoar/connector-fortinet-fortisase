@@ -1,0 +1,16 @@
+# rename this file to data.py and fill in the values
+
+TEST_CONFIG_USER = {
+    "auth_method": "Username/Password",
+    "username": "",
+    "password": "",
+    "client_id": "FortiSASE",
+    "server": "https://portal.prod.fortisase.com",
+    "verify_ssl": True  # set to True in production
+}
+
+TEST_CONFIG_TOKEN = {
+    "auth_method": "Token",  # or "Token"
+    "server": "https://portal.demo.fortisase.com",
+    "token": "Bearer XXX"
+}
