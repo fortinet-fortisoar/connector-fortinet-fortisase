@@ -1,5 +1,11 @@
-import importlib
+"""
+Copyright start
+MIT License
+Copyright (c) 2024 Fortinet Inc
+Copyright end
+"""
 
+import importlib
 import pytest
 
 # Import test configuration
