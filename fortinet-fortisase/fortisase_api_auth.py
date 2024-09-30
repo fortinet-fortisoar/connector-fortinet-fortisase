@@ -1,5 +1,11 @@
-import json
+"""
+Copyright start
+MIT License
+Copyright (c) 2024 Fortinet Inc
+Copyright end
+"""
 
+import json
 import requests
 from connectors.core.connector import get_logger, ConnectorError
 
@@ -102,7 +108,7 @@ def check(config):
         # return True if result is as expected
         service = co.make_rest_call("/resource-api/v2/security/services/HTTP", "GET")
         # check that service.data is list and has a primary key
-        if isinstance(service.get('data', []), list) and service.get('data', [])[0].get('primaryKey') == 'HTTP':
+        if service and isinstance(service.get('data', []), list) and service.get('data', [])[0].get('primaryKey') == 'HTTP':
             return True
 
         return False

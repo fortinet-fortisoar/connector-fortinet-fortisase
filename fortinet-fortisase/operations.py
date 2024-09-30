@@ -1,8 +1,14 @@
+"""
+Copyright start
+MIT License
+Copyright (c) 2024 Fortinet Inc
+Copyright end
+"""
+
 import json
-
-from connectors.core.connector import get_logger, ConnectorError
-
+from .constants import *
 from .fortisase_api_auth import FortiSASE, check
+from connectors.core.connector import get_logger, ConnectorError
 
 logger = get_logger('fortinet-fortisase')
 
@@ -12,7 +18,6 @@ def get_service(config, params):
         service_name = params.get('service_name')
         if not service_name:
             raise ConnectorError("Service name is required")
-
         co = FortiSASE(config)
         endpoint = f"/resource-api/v2/security/services/{service_name}"
         return co.make_rest_call(endpoint, 'GET')
@@ -71,8 +76,8 @@ def create_host(config, params):
         endpoint = "/resource-api/v2/network/hosts"
         payload = {
             "primaryKey": params['primaryKey'],
-            "type": params['type'],
-            "location": params['location']
+            "type": HOST_TYPE.get(params.get('type')),
+            "location": HOST_LOCATION.get(params.get('location'))
         }
 
         # Add type-specific fields
