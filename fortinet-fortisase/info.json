@@ -271,9 +271,9 @@
             "FQDN",
             "Geography"
           ],
-          "value": "ipmask",
+          "value": "IP Mask",
           "onchange": {
-            "ipmask": [
+            "IP Mask": [
               {
                 "title": "Subnet",
                 "description": "Subnet of the host (required for ipmask type)",
@@ -288,7 +288,7 @@
                 }
               }
             ],
-            "iprange": [
+            "IP Range": [
               {
                 "title": "Start IP",
                 "description": "Start IP address (required for iprange type)",
@@ -316,7 +316,7 @@
                 }
               }
             ],
-            "fqdn": [
+            "FQDN": [
               {
                 "title": "FQDN",
                 "description": "Fully Qualified Domain Name (required for fqdn type)",
@@ -331,7 +331,7 @@
                 }
               }
             ],
-            "geography": [
+            "Geography": [
               {
                 "title": "Country ID",
                 "description": "Two-letter country code (required for geography type)",
