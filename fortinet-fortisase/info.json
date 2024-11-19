@@ -8,7 +8,7 @@
   "cs_approved": true,
   "cs_compatible": true,
   "category": "Network Security",
-  "help_online": "",
+  "help_online": "https://github.com/fortinet-fortisoar/connector-fortinet-fortisase/blob/release/1.0.0/docs/FortinetFortisaseConnectorDoc.md",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "configuration": {
@@ -156,7 +156,20 @@
           "title": "Category",
           "description": "Specify the category that you want to assign to the service you want to create.",
           "tooltip": "Specify the category that you want to assign to the service you want to create.",
-          "type": "text",
+          "type": "select",
+          "options": [
+            "Authentication",
+            "Email",
+            "File Access",
+            "General",
+            "Network Services",
+            "Remote Access",
+            "Tunneling",
+            "Uncategorized",
+            "VoIP, Messaging & Other Applications",
+            "Web Access",
+            "Web Proxy"
+          ],
           "name": "category",
           "required": true,
           "visible": true,
@@ -166,7 +179,12 @@
           "title": "Protocol",
           "description": "Specify the protocol used by the service you want to create.",
           "tooltip": "Specify the protocol used by the service you want to create.",
-          "type": "text",
+          "type": "select",
+          "options": [
+            "TCP",
+            "UDP",
+            "SCTP"
+          ],
           "name": "protocol",
           "required": true,
           "visible": true,
@@ -247,6 +265,7 @@
         {
           "title": "Host Name",
           "description": "Specify the unique identifier for the host that you want to create.",
+          "tooltip": "Specify the unique identifier for the host that you want to create.",
           "type": "text",
           "name": "primaryKey",
           "required": true,
@@ -258,99 +277,9 @@
           }
         },
         {
-          "title": "Host Type",
-          "description": "Select the type of the host that you want to create. You can choose from the following options: \"IP Mask\" (Default), \"IP Range\", \"FQDN\", \"Geography\"",
-          "type": "select",
-          "name": "type",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "options": [
-            "IP Mask",
-            "IP Range",
-            "FQDN",
-            "Geography"
-          ],
-          "value": "IP Mask",
-          "onchange": {
-            "IP Mask": [
-              {
-                "title": "Subnet",
-                "description": "Subnet of the host (required for ipmask type)",
-                "type": "text",
-                "name": "subnet",
-                "required": true,
-                "visible": true,
-                "editable": true,
-                "validation": {
-                  "pattern": "^(\\{\\{.*?\\}\\}|(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d))/(0|[1-9]|[1-2]\\d|3[0-2])$",
-                  "patternError": "Subnet must be a valid IPv4 CIDR notation"
-                }
-              }
-            ],
-            "IP Range": [
-              {
-                "title": "Start IP",
-                "description": "Start IP address (required for iprange type)",
-                "type": "text",
-                "name": "startIp",
-                "required": true,
-                "visible": true,
-                "editable": true,
-                "validation": {
-                  "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
-                  "patternError": "Start IP must be a valid IPv4 address"
-                }
-              },
-              {
-                "title": "End IP",
-                "description": "End IP address (required for iprange type)",
-                "type": "text",
-                "name": "endIp",
-                "required": true,
-                "visible": true,
-                "editable": true,
-                "validation": {
-                  "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
-                  "patternError": "End IP must be a valid IPv4 address"
-                }
-              }
-            ],
-            "FQDN": [
-              {
-                "title": "FQDN",
-                "description": "Fully Qualified Domain Name (required for fqdn type)",
-                "type": "text",
-                "name": "fqdn",
-                "required": true,
-                "visible": true,
-                "editable": true,
-                "validation": {
-                  "pattern": "^({{.*}}|([a-zA-Z0-9_\\-]{1,63}\\.)+[a-zA-Z]{2,63})$",
-                  "patternError": "FQDN must be a valid domain name (1-255 characters)"
-                }
-              }
-            ],
-            "Geography": [
-              {
-                "title": "Country ID",
-                "description": "Two-letter country code (required for geography type)",
-                "type": "text",
-                "name": "countryId",
-                "required": true,
-                "visible": true,
-                "editable": true,
-                "validation": {
-                  "pattern": "^({{.*}}|[a-zA-Z]{2})$",
-                  "patternError": "Country ID must be a two-letter country code"
-                }
-              }
-            ]
-          }
-        },
-        {
           "title": "Location",
-          "description": "Select the location of the host that you want to create. You can choose from the following options: \"Internal\", \"External\", \"Private Access\", \"Unspecified\" (Default)",
+          "description": "Select the location of the host that you want to create. You can choose from the following options: \"Ingress\", \"Internet\", \"Private Access Hub\", \"Unspecified\" (Default)",
+          "tooltip": "Select the location of the host that you want to create.",
           "type": "select",
           "name": "location",
           "required": true,
@@ -358,11 +287,357 @@
           "editable": true,
           "value": "Unspecified",
           "options": [
-            "Internal",
-            "External",
-            "Private Access",
+            "Ingress",
+            "Internet",
+            "Private Access Hub",
             "Unspecified"
-          ]
+          ],
+          "onchange": {
+            "Ingress": [
+              {
+                "title": "Host Type",
+                "description": "Select the type of the host that you want to create. You can choose from the following options: \"IP Mask\" (Default), \"IP Range\"",
+                "tooltip": "Select the type of the host that you want to create.",
+                "type": "select",
+                "name": "type",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "options": [
+                  "IP Mask",
+                  "IP Range"
+                ],
+                "value": "IP Mask",
+                "onchange": {
+                  "IP Mask": [
+                    {
+                      "title": "Subnet",
+                      "description": "Subnet of the host (required for ipmask type)",
+                      "type": "text",
+                      "name": "subnet",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^(\\{\\{.*?\\}\\}|(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d))/(0|[1-9]|[1-2]\\d|3[0-2])$",
+                        "patternError": "Subnet must be a valid IPv4 CIDR notation"
+                      }
+                    }
+                  ],
+                  "IP Range": [
+                    {
+                      "title": "Start IP",
+                      "description": "Start IP address (required for iprange type)",
+                      "type": "text",
+                      "name": "startIp",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                        "patternError": "Start IP must be a valid IPv4 address"
+                      }
+                    },
+                    {
+                      "title": "End IP",
+                      "description": "End IP address (required for iprange type)",
+                      "type": "text",
+                      "name": "endIp",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                        "patternError": "End IP must be a valid IPv4 address"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "Internet": [
+              {
+                "title": "Host Type",
+                "description": "Select the type of the host that you want to create. You can choose from the following options: \"IP Mask\" (Default), \"IP Range\", \"FQDN\", \"Geography\"",
+                "tooltip": "Select the type of the host that you want to create.",
+                "type": "select",
+                "name": "type",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "options": [
+                  "IP Mask",
+                  "IP Range",
+                  "FQDN",
+                  "Geography"
+                ],
+                "value": "IP Mask",
+                "onchange": {
+                  "IP Mask": [
+                    {
+                      "title": "Subnet",
+                      "description": "Subnet of the host (required for ipmask type)",
+                      "type": "text",
+                      "name": "subnet",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^(\\{\\{.*?\\}\\}|(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d))/(0|[1-9]|[1-2]\\d|3[0-2])$",
+                        "patternError": "Subnet must be a valid IPv4 CIDR notation"
+                      }
+                    }
+                  ],
+                  "IP Range": [
+                    {
+                      "title": "Start IP",
+                      "description": "Start IP address (required for iprange type)",
+                      "type": "text",
+                      "name": "startIp",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                        "patternError": "Start IP must be a valid IPv4 address"
+                      }
+                    },
+                    {
+                      "title": "End IP",
+                      "description": "End IP address (required for iprange type)",
+                      "type": "text",
+                      "name": "endIp",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                        "patternError": "End IP must be a valid IPv4 address"
+                      }
+                    }
+                  ],
+                  "FQDN": [
+                    {
+                      "title": "FQDN",
+                      "description": "Fully Qualified Domain Name (required for fqdn type)",
+                      "type": "text",
+                      "name": "fqdn",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|([a-zA-Z0-9_\\-]{1,63}\\.)+[a-zA-Z]{2,63})$",
+                        "patternError": "FQDN must be a valid domain name (1-255 characters)"
+                      }
+                    }
+                  ],
+                  "Geography": [
+                    {
+                      "title": "Country ID",
+                      "description": "Two-letter country code (required for geography type)",
+                      "type": "text",
+                      "name": "countryId",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|[a-zA-Z]{2})$",
+                        "patternError": "Country ID must be a two-letter country code"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "Private Access Hub": [
+              {
+                "title": "Host Type",
+                "description": "Select the type of the host that you want to create. You can choose from the following options: \"IP Mask\" (Default), \"IP Range\", \"FQDN\", \"Geography\"",
+                "tooltip": "Select the type of the host that you want to create.",
+                "type": "select",
+                "name": "type",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "options": [
+                  "IP Mask",
+                  "IP Range",
+                  "FQDN",
+                  "Geography"
+                ],
+                "value": "IP Mask",
+                "onchange": {
+                  "IP Mask": [
+                    {
+                      "title": "Subnet",
+                      "description": "Subnet of the host (required for ipmask type)",
+                      "type": "text",
+                      "name": "subnet",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^(\\{\\{.*?\\}\\}|(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d))/(0|[1-9]|[1-2]\\d|3[0-2])$",
+                        "patternError": "Subnet must be a valid IPv4 CIDR notation"
+                      }
+                    }
+                  ],
+                  "IP Range": [
+                    {
+                      "title": "Start IP",
+                      "description": "Start IP address (required for iprange type)",
+                      "type": "text",
+                      "name": "startIp",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                        "patternError": "Start IP must be a valid IPv4 address"
+                      }
+                    },
+                    {
+                      "title": "End IP",
+                      "description": "End IP address (required for iprange type)",
+                      "type": "text",
+                      "name": "endIp",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                        "patternError": "End IP must be a valid IPv4 address"
+                      }
+                    }
+                  ],
+                  "FQDN": [
+                    {
+                      "title": "FQDN",
+                      "description": "Fully Qualified Domain Name (required for fqdn type)",
+                      "type": "text",
+                      "name": "fqdn",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|([a-zA-Z0-9_\\-]{1,63}\\.)+[a-zA-Z]{2,63})$",
+                        "patternError": "FQDN must be a valid domain name (1-255 characters)"
+                      }
+                    }
+                  ],
+                  "Geography": [
+                    {
+                      "title": "Country ID",
+                      "description": "Two-letter country code (required for geography type)",
+                      "type": "text",
+                      "name": "countryId",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|[a-zA-Z]{2})$",
+                        "patternError": "Country ID must be a two-letter country code"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "Unspecified": [
+              {
+                "title": "Host Type",
+                "description": "Select the type of the host that you want to create. You can choose from the following options: \"IP Mask\" (Default), \"IP Range\", \"FQDN\", \"Geography\"",
+                "tooltip": "Select the type of the host that you want to create.",
+                "type": "select",
+                "name": "type",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "options": [
+                  "IP Mask",
+                  "IP Range",
+                  "FQDN",
+                  "Geography"
+                ],
+                "value": "IP Mask",
+                "onchange": {
+                  "IP Mask": [
+                    {
+                      "title": "Subnet",
+                      "description": "Subnet of the host (required for ipmask type)",
+                      "type": "text",
+                      "name": "subnet",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^(\\{\\{.*?\\}\\}|(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d))/(0|[1-9]|[1-2]\\d|3[0-2])$",
+                        "patternError": "Subnet must be a valid IPv4 CIDR notation"
+                      }
+                    }
+                  ],
+                  "IP Range": [
+                    {
+                      "title": "Start IP",
+                      "description": "Start IP address (required for iprange type)",
+                      "type": "text",
+                      "name": "startIp",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                        "patternError": "Start IP must be a valid IPv4 address"
+                      }
+                    },
+                    {
+                      "title": "End IP",
+                      "description": "End IP address (required for iprange type)",
+                      "type": "text",
+                      "name": "endIp",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$",
+                        "patternError": "End IP must be a valid IPv4 address"
+                      }
+                    }
+                  ],
+                  "FQDN": [
+                    {
+                      "title": "FQDN",
+                      "description": "Fully Qualified Domain Name (required for fqdn type)",
+                      "type": "text",
+                      "name": "fqdn",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|([a-zA-Z0-9_\\-]{1,63}\\.)+[a-zA-Z]{2,63})$",
+                        "patternError": "FQDN must be a valid domain name (1-255 characters)"
+                      }
+                    }
+                  ],
+                  "Geography": [
+                    {
+                      "title": "Country ID",
+                      "description": "Two-letter country code (required for geography type)",
+                      "type": "text",
+                      "name": "countryId",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "validation": {
+                        "pattern": "^({{.*}}|[a-zA-Z]{2})$",
+                        "patternError": "Country ID must be a two-letter country code"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         }
       ],
       "enabled": true,
@@ -426,6 +701,7 @@
         {
           "title": "Policy Configuration",
           "description": "Specify the full configuration of the From Hub policy that you want to create.",
+          "tooltip": "Specify the full configuration of the From Hub policy that you want to create.",
           "type": "json",
           "name": "policy_config",
           "required": true,
@@ -441,7 +717,7 @@
     {
       "operation": "generic_api_call",
       "title": "Generic API Call",
-      "description": "Make a generic API call to Fortinet FortiSASE",
+      "description": "Make a generic API call to Fortinet FortiSASE.",
       "category": "investigation",
       "annotation": "generic_api_call",
       "parameters": [
