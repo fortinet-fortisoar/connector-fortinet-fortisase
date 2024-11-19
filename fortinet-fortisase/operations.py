@@ -155,4 +155,5 @@ operations = {
     'delete_host': delete_host,
     'create_to_hub_policy': create_to_hub_policy,
     'create_from_hub_policy': create_from_hub_policy,
+    'generic_api_call': generic_api_call
 }

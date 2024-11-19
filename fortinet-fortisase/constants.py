@@ -13,8 +13,8 @@ HOST_TYPE = {
 }
 
 HOST_LOCATION = {
-    "Internal": "internal",
-    "External": "external",
-    "Private Access": "private-access",
+    "Ingress": "internal",
+    "Internet": "external",
+    "Private Access Hub": "private-access",
     "Unspecified": "unspecified"
 }
