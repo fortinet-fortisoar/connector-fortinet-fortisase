@@ -38,9 +38,9 @@ def create_service(config, params):
     payload = {
         "primaryKey": params.get('primaryKey'),
         "category": params.get('category'),
-        "protocol": params.get('protocol'),
-        "tcpPortrange": params.get('tcpPortrange')
+        "protocol": params.get('protocol')
     }
+    payload.update(params.get('port_range'))
     return co.make_rest_call(endpoint, 'POST', data=json.dumps(payload))
 
 
@@ -81,7 +81,7 @@ def create_host(config, params):
         }
 
         # Add type-specific fields
-        host_type = params['type']
+        host_type = HOST_TYPE.get(params.get('type'))
         if host_type == 'ipmask':
             payload['subnet'] = params['subnet']
         elif host_type == 'iprange':
