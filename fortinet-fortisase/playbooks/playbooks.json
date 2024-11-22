@@ -66,7 +66,7 @@
               "status": null,
               "arguments": {
                 "name": "Fortinet FortiSASE",
-                "config": "''",
+                "config": "",
                 "params": [],
                 "version": "1.0.0",
                 "connector": "fortinet-fortisase",
@@ -143,7 +143,7 @@
               "status": null,
               "arguments": {
                 "name": "Fortinet FortiSASE",
-                "config": "''",
+                "config": "",
                 "params": [],
                 "version": "1.0.0",
                 "connector": "fortinet-fortisase",
@@ -220,8 +220,11 @@
               "status": null,
               "arguments": {
                 "name": "Fortinet FortiSASE",
-                "config": "''",
-                "params": [],
+                "config": "",
+                "params": {
+                  "protocol": "TCP/UDP/SCTP",
+                  "port_range": "{\n \"tcpPortrange\": [\n {\n \"destination\": {\n \"low\": 1,\n \"high\": 2\n }\n }\n ]\n }\n"
+                },
                 "version": "1.0.0",
                 "connector": "fortinet-fortisase",
                 "operation": "create_service",
@@ -297,7 +300,7 @@
               "status": null,
               "arguments": {
                 "name": "Fortinet FortiSASE",
-                "config": "''",
+                "config": "",
                 "params": [],
                 "version": "1.0.0",
                 "connector": "fortinet-fortisase",
@@ -374,7 +377,7 @@
               "status": null,
               "arguments": {
                 "name": "Fortinet FortiSASE",
-                "config": "''",
+                "config": "",
                 "params": [],
                 "version": "1.0.0",
                 "connector": "fortinet-fortisase",
@@ -451,7 +454,7 @@
               "status": null,
               "arguments": {
                 "name": "Fortinet FortiSASE",
-                "config": "''",
+                "config": "",
                 "params": {
                   "type": "ipmask",
                   "location": "unspecified"
@@ -531,7 +534,7 @@
               "status": null,
               "arguments": {
                 "name": "Fortinet FortiSASE",
-                "config": "''",
+                "config": "",
                 "params": [],
                 "version": "1.0.0",
                 "connector": "fortinet-fortisase",
@@ -608,7 +611,7 @@
               "status": null,
               "arguments": {
                 "name": "Fortinet FortiSASE",
-                "config": "''",
+                "config": "",
                 "params": [],
                 "version": "1.0.0",
                 "connector": "fortinet-fortisase",

@@ -75,7 +75,7 @@ The output contains the following populated JSON schema:
 <table border=1><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody><tr><td>Primary Key</td><td>Specify the unique identifier for the service that you want to create.
 </td></tr><tr><td>Category</td><td>Specify the category that you want to assign to the service you want to create.
 </td></tr><tr><td>Protocol</td><td>Specify the protocol used by the service you want to create.
-</td></tr><tr><td>Port Range</td><td>Specify the port range that you want to assign to the service you want to create.
+</td></tr><tr><td>Port Range</td><td>Specify the port range that you want to assign to the service you want to create. e.g. {"tcpPortrange": [{"destination": {"low": 1, "high": 2}}]} or {"udpPortrange": [{"destination": {"low": 1, "high": 2}}]}
 </td></tr></tbody></table>
 
 #### Output
