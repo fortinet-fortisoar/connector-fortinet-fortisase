@@ -39,7 +39,7 @@ For the procedure to configure a connector, click [here](https://docs.fortinet.c
 The following automated operations can be included in playbooks and you can also use the annotations to access operations from FortiSOAR&trade; release 4.10.0 and onwards:
 <table border=1><thead><tr><th>Function</th><th>Description</th><th>Annotation and Category</th></tr></thead><tbody><tr><td>Get Service</td><td>Retrieves a service based on the service name you have specified.</td><td>get_service <br/>Investigation</td></tr>
 <tr><td>Get Services List</td><td>Retrieves a list of all services.</td><td>get_services <br/>Investigation</td></tr>
-<tr><td>Create Service</td><td>Creates a new service based on the primary key, category, protocol and TCP port range you have specified.</td><td>create_service <br/>Investigation</td></tr>
+<tr><td>Create Service</td><td>Creates a new service based on the primary key, category, protocol and port range you have specified.</td><td>create_service <br/>Investigation</td></tr>
 <tr><td>Delete Service</td><td>Deletes a service based on the primary key you have specified.</td><td>delete_service <br/>Investigation</td></tr>
 <tr><td>Get Host</td><td>Retrieves a host based on the host name you have specified.</td><td>get_host <br/>Investigation</td></tr>
 <tr><td>Create Host</td><td>Creates a new host based on the host name, type and location you have specified.</td><td>create_host <br/>Investigation</td></tr>
@@ -75,7 +75,7 @@ The output contains the following populated JSON schema:
 <table border=1><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody><tr><td>Primary Key</td><td>Specify the unique identifier for the service that you want to create.
 </td></tr><tr><td>Category</td><td>Specify the category that you want to assign to the service you want to create.
 </td></tr><tr><td>Protocol</td><td>Specify the protocol used by the service you want to create.
-</td></tr><tr><td>TCP Port Range</td><td>Specify the TCP port range that you want to assign to the service you want to create.
+</td></tr><tr><td>Port Range</td><td>Specify the port range that you want to assign to the service you want to create.
 </td></tr></tbody></table>
 
 #### Output

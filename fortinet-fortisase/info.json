@@ -138,7 +138,7 @@
     {
       "operation": "create_service",
       "title": "Create Service",
-      "description": "Creates a new service based on the primary key, category, protocol and TCP port range you have specified.",
+      "description": "Creates a new service based on the primary key, category, protocol and port range you have specified.",
       "category": "investigation",
       "annotation": "create_service",
       "parameters": [
@@ -181,21 +181,21 @@
           "tooltip": "Specify the protocol used by the service you want to create.",
           "type": "select",
           "options": [
-            "TCP",
-            "UDP",
-            "SCTP"
+            "TCP/UDP/SCTP"
           ],
+          "value": "TCP/UDP/SCTP",
           "name": "protocol",
           "required": true,
           "visible": true,
           "editable": true
         },
         {
-          "title": "TCP Port Range",
-          "description": "Specify the TCP port range that you want to assign to the service you want to create.",
-          "tooltip": "Specify the TCP port range that you want to assign to the service you want to create.",
+          "title": "Port Range",
+          "description": "Specify the port range that you want to assign to the service you want to create. e.g. {\"tcpPortrange\": [{\"destination\": {\"low\": 1, \"high\": 2}}]} or {\"udpPortrange\": [{\"destination\": {\"low\": 1, \"high\": 2}}]}",
+          "tooltip": "Specify the port range that you want to assign to the service you want to create.",
           "type": "json",
-          "name": "tcpPortrange",
+          "name": "port_range",
+          "value": {"tcpPortrange": [{"destination": {"low": 1, "high": 2}}]},
           "required": true,
           "visible": true,
           "editable": true

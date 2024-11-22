@@ -172,7 +172,7 @@
           "uuid": "58028bf6-7bb0-4fe7-af96-60c4bad51831",
           "collection": "/api/3/workflow_collections/623704ed-ab0f-4a91-8a0e-1174e5b4decf",
           "triggerLimit": null,
-          "description": "Creates a new service based on the primary key, category, protocol and TCP port range you have specified.",
+          "description": "Creates a new service based on the primary key, category, protocol and port range you have specified.",
           "name": "Create Service",
           "tag": "#Fortinet FortiSASE",
           "recordTags": [
